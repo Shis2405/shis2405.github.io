@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shishir Sharma | SRE Leader &amp; Platform Engineering</title>
+<meta name="description" content="Shishir Sharma — Senior SRE Engineering Manager. SRE leadership, platform engineering, and applied AI in operations.">
+<style>
+  :root{
+    --bg: #0a0e0d;
+    --bg-2: #0d1512;
+    --panel: #101613;
+    --border: #1c2622;
+    --text: #e8ece9;
+    --text-dim: #8b9a93;
+    --accent: #4ee8a6;
+    --accent-dim: #2a5c47;
+    --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(78,232,166,0.08), transparent 40%),
+      radial-gradient(circle at 85% 60%, rgba(78,232,166,0.05), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:var(--mono);}
+  .accent{color:var(--accent);}
+  .dim{color:var(--text-dim);}
+
+  /* Nav */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,13,0.7);
+    border-bottom:1px solid var(--border);
+  }
+  header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    width:34px;height:34px;border-radius:8px;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-weight:700;color:var(--accent);
+  }
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{font-size:14px;color:var(--text-dim);transition:color .2s;}
+  nav a:hover{color:var(--text);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  /* Hero */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;
+  }
+  .tag-line{
+    font-family:var(--mono);color:var(--accent);font-size:14px;margin-bottom:18px;
+    opacity:0;animation:fadeUp .7s ease forwards;
+  }
+  .hero h1{
+    font-size:clamp(32px,6vw,64px);
+    font-weight:700;letter-spacing:-0.02em;
+    margin-bottom:12px;
+    opacity:0;animation:fadeUp .7s ease .1s forwards;
+  }
+  .hero h2{
+    font-size:clamp(16px,2.4vw,22px);
+    font-weight:500;color:var(--text-dim);
+    margin-bottom:22px;max-width:640px;
+    opacity:0;animation:fadeUp .7s ease .2s forwards;
+  }
+  .hero p.lead{
+    max-width:560px;color:var(--text-dim);margin-bottom:34px;
+    opacity:0;animation:fadeUp .7s ease .3s forwards;
+  }
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease .4s forwards;}
+  .btn{
+    padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;
+    display:inline-flex;align-items:center;gap:8px;transition:transform .2s, background .2s, border-color .2s;
+  }
+  .btn-primary{background:var(--accent);color:#062015;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{border:1px solid var(--border);color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+  .scroll-cue{
+    position:absolute;bottom:34px;left:24px;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--text-dim);
+  }
+  .scroll-cue .dot{
+    width:22px;height:34px;border:1px solid var(--border);border-radius:12px;
+    display:flex;justify-content:center;padding-top:6px;
+  }
+  .scroll-cue .dot::after{
+    content:"";width:4px;height:8px;background:var(--accent);border-radius:2px;
+    animation:scrollDown 1.6s infinite;
+  }
+  @keyframes scrollDown{0%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(10px);}}
+
+  /* Sections */
+  section{padding:110px 0;position:relative;}
+  .section-label{
+    font-family:var(--mono);color:var(--accent);font-size:14px;margin-bottom:14px;
+  }
+  .section-title{font-size:clamp(24px,3.4vw,34px);font-weight:700;margin-bottom:40px;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start;}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .stat{
+    border:1px solid var(--border);border-radius:12px;padding:20px;
+    background:var(--panel);
+  }
+  .stat .num{font-family:var(--mono);font-size:28px;color:var(--accent);font-weight:700;}
+  .stat .label{font-size:12px;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;}
+
+  /* Experience */
+  .timeline{border-left:1px solid var(--border);margin-left:6px;}
+  .job{position:relative;padding:0 0 44px 32px;}
+  .job:last-child{padding-bottom:0;}
+  .job::before{
+    content:"";position:absolute;left:-6px;top:4px;
+    width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--accent);
+  }
+  .job-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:6px;}
+  .job-title{font-size:18px;font-weight:700;}
+  .job-company{color:var(--accent);font-weight:600;}
+  .job-meta{font-family:var(--mono);font-size:13px;color:var(--text-dim);}
+  .job ul{margin:10px 0 12px 18px;color:var(--text-dim);font-size:14.5px;}
+  .job ul li{margin-bottom:6px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .chip{
+    font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:6px;
+    border:1px solid var(--border);color:var(--text-dim);background:var(--panel);
+  }
+  .edit-note{font-size:12px;color:#c98a3a;font-family:var(--mono);}
+
+  /* Education */
+  .edu-card{
+    border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--panel);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+
+  /* Skills */
+  .skills-group{margin-bottom:32px;}
+  .skills-group h3{
+    font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--text-dim);margin-bottom:14px;
+  }
+  .skills-list{display:flex;flex-wrap:wrap;gap:10px;}
+  .skill-pill{
+    font-size:13.5px;padding:7px 14px;border-radius:20px;
+    border:1px solid var(--border);background:var(--panel);
+    transition:border-color .2s, color .2s;
+  }
+  .skill-pill:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* Writing */
+  .writing-card{
+    border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--panel);
+    margin-bottom:18px;
+  }
+  .writing-card h4{font-size:17px;margin-bottom:8px;}
+  .writing-card p{color:var(--text-dim);font-size:14.5px;}
+
+  /* Contact */
+  .contact{
+    text-align:left;
+    border-top:1px solid var(--border);
+  }
+  .contact h2{font-size:clamp(26px,4vw,42px);margin-bottom:16px;max-width:640px;}
+  .contact p.lead{color:var(--text-dim);max-width:560px;margin-bottom:30px;}
+  .contact-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:30px;}
+  .contact-links a{
+    font-family:var(--mono);font-size:14px;color:var(--text-dim);
+    border:1px solid var(--border);padding:10px 18px;border-radius:8px;
+  }
+  .contact-links a:hover{color:var(--accent);border-color:var(--accent);}
+
+  footer{
+    padding:30px 0 50px;color:var(--text-dim);font-size:13px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  @media (max-width: 760px){
+    nav ul{display:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .stats{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="logo">S</a>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="tag-line mono">// Hi, my name is</div>
+      <h1>Shishir Sharma.</h1>
+      <h2>Senior SRE Engineering Manager &amp; Head of Engineering, Walmart Mexico</h2>
+      <p class="lead">I lead engineering and site reliability organizations that keep large-scale retail systems fast, resilient, and always on — and I build the platform and AI tooling that gets teams there faster.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#experience" class="btn btn-outline">See my experience</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="dot"></span></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap reveal">
+      <div class="section-label mono">// About me</div>
+      <h2 class="section-title">Reliability, at scale.</h2>
+      <div class="about-grid">
+        <div>
+          <p>I'm a Senior SRE Engineering Manager at Walmart Mexico, also functioning as Head of Engineering and Principal SRE — leading a large engineering organization across both direct and indirect reports.</p>
+          <p>My career spans Tata Consultancy Services, Netflix, Thomson Reuters, and Walmart Mexico, giving me cross-industry depth across banking, entertainment, and retail. Wherever I've worked, the throughline has been the same: making complex systems reliable, observable, and easy for teams to operate.</p>
+          <p>Today my work sits at the intersection of SRE leadership, platform engineering, and applied AI in operations — building the roadmaps, tooling, and culture that let large orgs ship faster without breaking things.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="num">140+</div><div class="label">Engineers led</div></div>
+          <div class="stat"><div class="num">4 nines</div><div class="label">Reliability achieved</div></div>
+          <div class="stat"><div class="num">40%</div><div class="label">Infra cost reduced</div></div>
+          <div class="stat"><div class="num">10–15 min</div><div class="label">Release cycle (from ~1 week)</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap reveal">
+      <div class="section-label mono">// Experience</div>
+      <h2 class="section-title">Where I've worked</h2>
+
+      <div class="timeline">
+
+        <div class="job">
+          <div class="job-head">
+            <div><span class="job-title">Senior Engineering Manager</span> · <span class="job-company">Walmart Mexico</span></div>
+            <div class="job-meta">Jun 2025 – Present · Mexico</div>
+          </div>
+          <div class="dim" style="font-size:14px;">Also functioning as Head of Engineering / Principal SRE</div>
+          <ul>
+            <li>Inherited and scaled a 140+ engineer organization spanning direct and indirect reports.</li>
+            <li>Cut release cycles from roughly one week to 10–15 minutes by building ArgoCD and Ansible-driven delivery pipelines.</li>
+            <li>Improved production reliability from one nine to four nines over six months.</li>
+            <li>Reduced infrastructure spend by 40% through platform and cost-efficiency initiatives.</li>
+            <li>Built a 2–3 year SRE roadmap for WMX drawing on Google-style SLOs, Netflix-style chaos engineering, Amazon-style cell-based architecture, and Meta-style progressive delivery — anchored to Walmart Mexico's Hot Sale, El Buen Fin, and POS system realities.</li>
+            <li>Driving applied AI in operations: RAG-based internal copilots, agentic/MCP-style automation for incident management, and AIOps anomaly detection.</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip">SRE Leadership</span><span class="chip">Platform Engineering</span><span class="chip">Kubernetes</span><span class="chip">AWS</span><span class="chip">ArgoCD</span><span class="chip">AIOps</span>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div><span class="job-title">Engineering Manager, SRE</span> · <span class="job-company">Thomson Reuters</span></div>
+            <div class="job-meta">Oct 2023 – Jun 2025</div>
+          </div>
+          <p class="dim" style="font-size:14px;">Led SRE engineering for banking &amp; financial information services platforms.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div><span class="job-title">Senior SRE</span> · <span class="job-company">Netflix</span></div>
+            <div class="job-meta">Jan 2023 – Sep 2023</div>
+          </div>
+          <p class="dim" style="font-size:14px;">Site reliability engineering for entertainment &amp; streaming infrastructure.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div><span class="job-title">Engineering Lead</span> · <span class="job-company">Tata Consultancy Services</span></div>
+            <div class="job-meta">Mar 2014 – Dec 2022</div>
+          </div>
+          <p class="dim" style="font-size:14px;">Nearly nine years leading engineering delivery across client engagements.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap reveal">
+      <div class="section-label mono">// Skills &amp; tools</div>
+      <h2 class="section-title">What I work with</h2>
+
+      <div class="skills-group">
+        <h3>AI in Operations</h3>
+        <div class="skills-list">
+          <span class="skill-pill">RAG Pipelines</span><span class="skill-pill">Open-Source LLMs</span><span class="skill-pill">Agentic Automation</span><span class="skill-pill">MCP (Model Context Protocol)</span><span class="skill-pill">FastMCP (Python)</span><span class="skill-pill">AIOps Anomaly Detection</span><span class="skill-pill">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>SRE &amp; Platform</h3>
+        <div class="skills-list">
+          <span class="skill-pill">SLOs</span><span class="skill-pill">Chaos Engineering</span><span class="skill-pill">Cell-Based Architecture</span><span class="skill-pill">Progressive Delivery</span><span class="skill-pill">Incident Management</span><span class="skill-pill">ArgoCD</span><span class="skill-pill">Ansible</span><span class="skill-pill">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Cloud &amp; Infrastructure</h3>
+        <div class="skills-list">
+          <span class="skill-pill">AWS</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">Docker</span><span class="skill-pill">Linux</span><span class="skill-pill">Terraform / IaC</span><span class="skill-pill">Azure</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Data &amp; Backend</h3>
+        <div class="skills-list">
+          <span class="skill-pill">PostgreSQL</span><span class="skill-pill">SQL</span><span class="skill-pill">Python</span><span class="skill-pill">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Leadership</h3>
+        <div class="skills-list">
+          <span class="skill-pill">Org Scaling (140+ engineers)</span><span class="skill-pill">Cross-Functional Delivery</span><span class="skill-pill">Mentoring</span><span class="skill-pill">Influence Without Authority</span><span class="skill-pill">Cost Optimization</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="wrap reveal">
+      <div class="section-label mono">// Writing</div>
+      <h2 class="section-title">Thoughts &amp; thought leadership</h2>
+      <div class="writing-card">
+        <h4>AI Datacenter Energy Infrastructure</h4>
+        <p>A Medium piece on the energy constraints shaping AI datacenter growth, illustrated with custom SVG diagrams, shared with the community on LinkedIn.</p>
+      </div>
+      <p class="dim" style="font-size:14px;">I write about SRE leadership, platform engineering, and the intersection of AI and operations — sharing lessons from scaling engineering orgs and building resilient systems.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <div class="section-label mono">// What's next</div>
+      <h2>Let's connect.</h2>
+      <p class="lead">Open to conversations about SRE leadership, platform engineering, and applied AI in operations — reach out any time.</p>
+      <div class="contact-links">
+        <a href="mailto:shishirsharma486@gmail.com">shishirsharma486@gmail.com</a>
+        <a href="https://www.linkedin.com/in/shishirsharma486/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/shis2405" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:10px;">
+    <span>Designed &amp; built by Shishir Sharma</span>
+    <span>Mexico</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Mobile nav fallback: smooth scroll already via CSS; ensure header links work
+</script>
+
+</body>
+</html>
